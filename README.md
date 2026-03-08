@@ -18,11 +18,11 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 
 ## Tecnologias
 
-- **COBOL** - Lógica de conversão
-- **Python** - Framework Flask
-- **Google Cloud Run** - Hosting
-- **Docker** - Containerização
-- **GitHub Pages** - Interface web
+- COBOL
+- Python + Flask
+- Google Cloud Run
+- Docker
+- GitHub Pages
 
 ## Desenvolvedor
 
