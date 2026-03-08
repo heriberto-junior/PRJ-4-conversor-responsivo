@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moedas COBOL - API Interativa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0d2d0d 0%, #1a3d1a 100%);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #1a1a2e;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #00ff00;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #00cc44;
+            font-size: 14px;
+        }
+
+        .dino {
+            text-align: center;
+            font-size: 48px;
+            margin: 10px 0;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.5));
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ff00;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px;
+            background: #0d0d2d;
+            border: 1px solid #00ff00;
+            color: #00ff00;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            background: #16213e;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00ff00, #00cc44);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #00ffff, #00ff00);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background: #555;
+            color: #999;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .resultado {
+            margin-top: 30px;
+            padding: 20px;
+            background: #0d0d2d;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            display: none;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        .resultado.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .resultado-titulo {
+            color: #00ffff;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .resultado-valor {
+            color: #00ff00;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            border-radius: 3px;
+        }
+
+        .erro {
+            background: #2d0d0d;
+            border-color: #ff006e !important;
+            color: #ff006e !important;
+        }
+
+        .erro .resultado-titulo {
+            color: #ff006e;
+        }
+
+        .sucesso {
+            background: #0d2d0d;
+            border-color: #00ff00 !important;
+        }
+
+        .loading {
+            text-align: center;
+            color: #00ffff;
+            display: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00ff00;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            border-radius: 3px;
+            font-size: 12px;
+            color: #00cc44;
+        }
+
+        .moedas-suportadas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .moeda-tag {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 8px 12px;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 12px;
+            border: 1px solid #00ff00;
+        }
+
+        .api-status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 255, 0, 0.1);
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .api-status.online {
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .api-status.offline {
+            color: #ff006e;
+            border: 1px solid #ff006e;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .online .status-indicator {
+            background: #00ff00;
+            box-shadow: 0 0 5px #00ff00;
+        }
+
+        .offline .status-indicator {
+            background: #ff006e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="dino">🦕</div>
+            <h1>Conversor de Moedas</h1>
+            <p>COBOL + API REST + Google Cloud</p>
+        </div>
+
+        <form id="formConversor">
+            <div class="form-group">
+                <label for="valor">Valor (BRL):</label>
+                <input 
+                    type="number" 
+                    id="valor" 
+                    placeholder="Ex: 100" 
+                    step="0.01"
+                    min="0"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="moeda">Moeda de Destino:</label>
+                <select id="moeda" required>
+                    <option value="">Selecione uma moeda</option>
+                    <option value="USD">🇺🇸 Dólar Americano (USD)</option>
+                    <option value="EUR">🇪🇺 Euro (EUR)</option>
+                    <option value="JPY">🇯🇵 Iene Japonês (JPY)</option>
+                    <option value="GBP">🇬🇧 Libra Esterlina (GBP)</option>
+                    <option value="AUD">🇦🇺 Dólar Australiano (AUD)</option>
+                    <option value="CAD">🇨🇦 Dólar Canadense (CAD)</option>
+                </select>
+            </div>
+
+            <button type="submit" id="btnConverter">Converter</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Executando COBOL na nuvem...</p>
+        </div>
+
+        <div class="resultado" id="resultado"></div>
+
+        <div class="api-status" id="apiStatus">
+            <span class="status-indicator"></span>
+            <span id="statusText">Verificando API...</span>
+        </div>
+
+        <div class="info">
+            <strong>ℹ️ Informações:</strong>
+            <p>Esta é uma demonstração ao vivo da API COBOL rodando no Google Cloud Run.</p>
+            <div class="moedas-suportadas">
+                <div class="moeda-tag">USD - Dólar</div>
+                <div class="moeda-tag">EUR - Euro</div>
+                <div class="moeda-tag">JPY - Iene</div>
+                <div class="moeda-tag">GBP - Libra</div>
+                <div class="moeda-tag">AUD - Dólar AU</div>
+                <div class="moeda-tag">CAD - Dólar CA</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://conversor-moedas-437617461453.us-central1.run.app';
+        const form = document.getElementById('formConversor');
+        const loading = document.getElementById('loading');
+        const resultado = document.getElementById('resultado');
+        const apiStatus = document.getElementById('apiStatus');
+        const statusText = document.getElementById('statusText');
+
+        // Verificar status da API
+        async function verificarStatus() {
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                if (response.ok) {
+                    apiStatus.classList.add('online');
+                    apiStatus.classList.remove('offline');
+                    statusText.textContent = '✓ API Online';
+                } else {
+                    throw new Error('API offline');
+                }
+            } catch (error) {
+                apiStatus.classList.add('offline');
+                apiStatus.classList.remove('online');
+                statusText.textContent = '✗ API Offline';
+            }
+        }
+
+        // Verificar status ao carregar
+        verificarStatus();
+        // Verificar a cada 30 segundos
+        setInterval(verificarStatus, 30000);
+
+        // Converter moeda
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const valor = document.getElementById('valor').value;
+            const moeda = document.getElementById('moeda').value;
+
+            if (!valor || !moeda) {
+                alert('Preencha todos os campos!');
+                return;
+            }
+
+            loading.style.display = 'block';
+            resultado.classList.remove('show');
+
+            try {
+                const response = await fetch(`${API_URL}/converter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ valor, moeda })
+                });
+
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (data.sucesso) {
+                    resultado.innerHTML = `
+                        <div class="resultado-titulo">✓ Conversão Realizada</div>
+                        <div class="resultado-valor">${data.resultado}</div>
+                        <small>Valor original: ${data.valor} BRL</small>
+                    `;
+                    resultado.classList.add('show', 'sucesso');
+                    resultado.classList.remove('erro');
+                } else {
+                    resultado.innerHTML = `
+                        <div class="resultado-titulo">✗ Erro na Conversão</div>
+                        <div>${data.erro}</div>
+                    `;
+                    resultado.classList.add('show', 'erro');
+                    resultado.classList.remove('sucesso');
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                resultado.innerHTML = `
+                    <div class="resultado-titulo">✗ Erro de Conexão</div>
+                    <div>${error.message}</div>
+                    <small>Verifique se a API está online</small>
+                `;
+                resultado.classList.add('show', 'erro');
+                resultado.classList.remove('sucesso');
+            }
+        });
+
+        // Focar no input ao carregar
+        document.getElementById('valor').focus();
+    </script>
+</body>
+</html>
+
