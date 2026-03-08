@@ -1,7 +1,39 @@
 ## Projeto 4 - Conversor de moedas desenvolvido em COBOL responsivo (em andamento)
 
-Clique no botão abaixo para testar a API em tempo real:
+# Conversor de Moedas - COBOL + API REST
 
-[![Abrir Testador](https://img.shields.io/badge/Abrir%20Testador%20Interativo-3270%20Terminal-brightgreen)](https://heribertonsjr.github.io/PRJ-4-conversor-responsivo/index.html)
+## Testador Interativo
 
-Ou acesse diretamente: https://heribertonsjr.github.io/PRJ-4-conversor-responsivo/index.html
+**[👉 Clique aqui para testar a API](https://heribertonsjr.github.io/PRJ-4-conversor-responsivo/)**
+
+---
+
+## API em Produção
+
+**URL:** https://conversor-moedas-437617461453.us-central1.run.app
+
+## Endpoints
+
+### GET /health
+```bash
+curl https://conversor-moedas-437617461453.us-central1.run.app/health
+```
+
+### POST /converter
+```bash
+curl -X POST https://conversor-moedas-437617461453.us-central1.run.app/converter \
+  -H "Content-Type: application/json" \
+  -d '{"valor":"100","moeda":"USD"}'
+```
+
+## Tecnologias
+
+- **COBOL** - Lógica de conversão
+- **Python** - Framework Flask
+- **Google Cloud Run** - Hosting
+- **Docker** - Containerização
+- **GitHub Pages** - Interface web
+
+## Desenvolvedor
+
+**Heriberto** - Mainframe Developer
