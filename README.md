@@ -33,20 +33,20 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 **- 05.** API (app.py) recebe requisição  
 **- 06.** app.py executa COBOL:  
          ```
-         ./coin 100 USD 
+         ./coin 100 USD
          ```  
 **- 07.** COBOL processa (lê cotacao.txt, calcula)  
 **- 08.** COBOL retorna:  
           Resultado:  19330.000 USD  
 **- 09.** app.py converte para JSON:  
          ```  
-         {  
+         {
          ```  
          ```  
-           "resultado": "Resultado:  19330.000 USD",  
+           "resultado": "Resultado:  19330.000 USD",
          ```  
          ```  
-           "sucesso": true  
+           "sucesso": true
            ```  
            ```  
           }
@@ -54,7 +54,7 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 **- 10.** JavaScript recebe JSON  
 **- 11.** index.html mostra resultado:  
        ```
-       ✓ Conversão Realizada  
+       ✓ Conversão Realizada
        ```  
        ```  
         Resultado:  19330.000 USD
