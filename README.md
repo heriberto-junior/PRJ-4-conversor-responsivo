@@ -20,12 +20,14 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 
 ## Fluxo do Projeto
 
-**`01.** Usuário acessa https://heriberto-junior.github.io/PRJ-4-conversor-responsivo/ (GitHub Pages)  
-**`02.** Navegador baixa index.html (HTML + CSS + JavaScript)  
+**- 01.** Usuário acessa https://heriberto-junior.github.io/PRJ-4-conversor-responsivo/ (GitHub Pages)  
+**- 02.** Navegador baixa index.html (HTML + CSS + JavaScript)  
 **- 03.** Usuário digita por exemplo: 100 BRL → USD  
 **- 04.** JavaScript faz fetch para API:  
           ```
-          POST https://conversor-responsivo-437617461453.us-central1.run.app/converter  
+          POST https://conversor-responsivo-437617461453.us-central1.run.app/converter
+          ``` 
+          ``` 
           { "valor": "100", "moeda": "USD" }
           ```  
 **- 05.** API (app.py) recebe requisição  
