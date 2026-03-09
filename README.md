@@ -12,7 +12,7 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 
 - **Backend:** COBOL GNU (lógica de conversão)
 - **API:** REST em Python (Flask)
-- **Deployment:** Google Cloud Run
+- **Deployment:** Google Cloud Run (Servidor disponível até 05/06/2026)
 - **Frontend:** HTML/CSS/JavaScript (GitHub Pages)
 - **Containerização:** Docker
 
