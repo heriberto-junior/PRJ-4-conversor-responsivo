@@ -24,23 +24,23 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 **- 02.** Navegador baixa index.html (HTML + CSS + JavaScript)  
 **- 03.** Usuário digita por exemplo: 100 BRL → USD  
 **- 04.** JavaScript faz fetch para API:  
-          POST https://conversor-responsivo-437617461453.us-central1.run.app/converter  
-          { "valor": "100", "moeda": "USD" }  
+          ```POST https://conversor-responsivo-437617461453.us-central1.run.app/converter  
+          { "valor": "100", "moeda": "USD" }```  
 **- 05.** API (app.py) recebe requisição  
 **- 06.** app.py executa COBOL:  
-          ./coin 100 USD  
+         ``` ./coin 100 USD  ```
 **- 07.** COBOL processa (lê cotacao.txt, calcula)  
 **- 08.** COBOL retorna:  
           Resultado:  19330.000 USD  
 **- 09.** app.py converte para JSON:  
-          {  
+         ``` {  
            "resultado": "Resultado:  19330.000 USD",  
            "sucesso": true  
-          }  
+          } ``` 
 **- 10.** JavaScript recebe JSON  
 **- 11.** index.html mostra resultado:  
-        ✓ Conversão Realizada  
-        Resultado:  19330.000 USD  
+       ``` ✓ Conversão Realizada  
+        Resultado:  19330.000 USD ``` 
 **- 12.** Usuário vê resultado em tempo real  
 
 
