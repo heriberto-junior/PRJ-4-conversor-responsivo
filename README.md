@@ -33,9 +33,8 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 10. COBOL retorna:
    Resultado:  19330.000 USD
 11. app.py converte para JSON:
-    
+#bash
    {
-   
      "resultado": "Resultado:  19330.000 USD",
      "sucesso": true
    }
