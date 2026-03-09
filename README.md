@@ -39,16 +39,16 @@ Projeto que demonstra como integrar **COBOL clássico** com **tecnologias modern
 **- 08.** COBOL retorna:  
           Resultado:  19330.000 USD  
 **- 09.** app.py converte para JSON:  
-         ```
-         { 
+         ```  
+         {  
          ```  
          ```  
            "resultado": "Resultado:  19330.000 USD",  
-```
-```  
+         ```  
+         ```  
            "sucesso": true  
            ```  
-           ``` 
+           ```  
           }
           ```  
 **- 10.** JavaScript recebe JSON  
