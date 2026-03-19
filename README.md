@@ -1,4 +1,4 @@
-## Project 4 - Currency Converter built with COBOL + REST API
+## Project 4 - Currency Converter built with COBOL + REST API [EN]
 
 ## Click below to test the API in real time:
 
@@ -70,7 +70,7 @@ A project that demonstrates how to integrate **classic COBOL** with **modern tec
 ---
 ---
 
-## Projeto 4 - Conversor de moedas desenvolvido em COBOL + API REST
+## Projeto 4 - Conversor de moedas desenvolvido em COBOL + API REST [PT-BR]
 
 ## Clique abaixo para testar a API em tempo real:
 
