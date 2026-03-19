@@ -1,4 +1,4 @@
-## Project 4 - Currency Converter built with COBOL + REST API [EN]
+## Project 4 - Currency Converter built with COBOL + REST API [ENG]
 
 ## Click below to test the API in real time:
 
